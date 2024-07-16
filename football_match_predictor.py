@@ -3,7 +3,7 @@ import pandas as pd
 from datetime import datetime, timedelta
 import numpy as np
 import pickle
-import io
+from urllib.request import urlopen
 
 # Function to load the trained model
 def load_model(model_path):
