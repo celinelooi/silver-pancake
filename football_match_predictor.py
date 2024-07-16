@@ -17,15 +17,11 @@ def load_model(model_path):
         st.error(f"Error loading model: {e}")
         return None
 
-# Define the model path and load the model
 github_url = "https://raw.githubusercontent.com/celinelooi/silver-pancake/main/trained_model2.pkl"
 
-# Download the model file from GitHub
-response = requests.get(github_url)
-model_file = io.BytesIO(response.content)
-
-# Load the model
-model = pickle.load(model_file)
+# Download and load the model file from GitHub
+with urlopen(github_url) as response:
+    model = pickle.load(response)
 
 # Title and description
 st.title('Football Match Predictor')
