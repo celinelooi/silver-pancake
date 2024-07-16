@@ -3,6 +3,7 @@ import pandas as pd
 from datetime import datetime, timedelta
 import numpy as np
 import pickle
+import io
 
 # Function to load the trained model
 def load_model(model_path):
@@ -17,14 +18,14 @@ def load_model(model_path):
         return None
 
 # Define the model path and load the model
-model_path = "/Users/celinelooi/Downloads/FYP/trained_model2.pkl"
+github_url = "https://raw.githubusercontent.com/celinelooi/silver-pancake/main/trained_model2.pkl"
 
-model = load_model(model_path)
+# Download the model file from GitHub
+response = requests.get(github_url)
+model_file = io.BytesIO(response.content)
 
-if model is not None:
-    st.write("Model loaded successfully")
-else:
-    st.stop()
+# Load the model
+model = pickle.load(model_file)
 
 # Title and description
 st.title('Football Match Predictor')
